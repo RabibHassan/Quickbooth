@@ -49,3 +49,12 @@ export const vendorForm = async (
 ) => {
   return axios.post(`${API_URL}/vendor_form/`, { store_name })
 }
+
+export const addProduct = async (
+  product_name: string,
+  product_type: string,
+  price: string,
+  quantity: string
+) => {
+  return axios.post(`${API_URL}/add_product/`, { product_name, product_type, price, quantity })
+}
