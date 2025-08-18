@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout, getProfile, vendorForm } from "../api";
+import { logout, getProfile, vendorForm, addProduct } from "../api";
 import "./Main.css";
 
 function BecomeVendorPage() {
@@ -23,6 +23,12 @@ function BecomeVendorPage() {
     const [store_name, setStore_name] = useState<string>("");
     const [stype, setStype] = useState<string>("");
 
+    const [product_name, setProduct_name] = useState<string>("");
+    const [product_type, setProduct_type] = useState<string>("");
+    const [price, setPrice] = useState<string>("");
+    const [quantity, setQuantity] = useState<string>("");
+
+
 
     const handleLogout = () => {
         logout();
@@ -35,6 +41,20 @@ function BecomeVendorPage() {
         try {
             if (!profile) return;
             const response = await vendorForm(store_name);
+            if (response) {
+                window.location.reload();
+            }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (err: unknown) {
+            setError("Registration Failed. Please try again");
+        }
+    };
+
+    const handleaddProduct = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            if (!profile) return;
+            const response = await addProduct(product_name, product_type, price, quantity);
             if (response) {
                 window.location.reload();
             }
@@ -155,6 +175,60 @@ function BecomeVendorPage() {
                                     className="box" />
                             </div>
                         </div>
+                        <button style={{ width: "60px", height: "40px", marginLeft: "470px" }} className="logout-b" type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div style={{ marginTop: "50px", height: "350px" }} className="vendor-container">
+                <form onSubmit={handleaddProduct}>
+                    <div>
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                            <div>
+                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingLeft: "20px", paddingTop: "20px" }}>Enter Product Name: </p>
+                                <input style={{ marginLeft: "20px", paddingLeft: "10px", border: "none", marginRight: "20px", width: "470px" }}
+                                    type="text"
+                                    placeholder="Store Name"
+                                    value={product_name}
+                                    onChange={(e) => setProduct_name(e.target.value)}
+                                    required
+                                    className="box" />
+                            </div>
+                            <div>
+                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingTop: "20px" }}>Enter Product Type: </p>
+                                <input style={{ marginRight: "20px", paddingLeft: "10px", border: "none", width: "470px" }}
+                                    type="text"
+                                    placeholder="Store Type"
+                                    value={product_type}
+                                    onChange={(e) => setProduct_type(e.target.value)}
+                                    required
+                                    className="box" />
+                            </div>
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                            <div>
+                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingLeft: "20px", paddingTop: "20px" }}>Enter Price: </p>
+                                <input style={{ marginLeft: "20px", paddingLeft: "10px", border: "none", marginRight: "20px", width: "470px" }}
+                                    type="text"
+                                    placeholder="Store Name"
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                    required
+                                    className="box" />
+                            </div>
+                            <div>
+                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingTop: "20px" }}>Enter Quantity: </p>
+                                <input style={{ marginRight: "20px", paddingLeft: "10px", border: "none", width: "470px" }}
+                                    type="text"
+                                    placeholder="Store Type"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(e.target.value)}
+                                    required
+                                    className="box" />
+                            </div>
+                        </div>
+
                         <button style={{ width: "60px", height: "40px", marginLeft: "470px" }} className="logout-b" type="submit">
                             Submit
                         </button>
