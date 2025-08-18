@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from .models import Vendor
+from .models import Vendor, Product
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -117,4 +117,16 @@ def vendor_form(request):
     
 
     Vendor.objects.create(store_name=store_name)
+    return Response({'message':'User Created Successfully'},status=status.HTTP_201_CREATED)
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def add_product(request):
+    if request.method=="POST":
+        product_name=request.data.get(product_name)
+        product_type=request.data.get(product_type)
+        price=request.data.get(price)
+        quantity=request.data.get(quantity)
+        
+    Product.objects.create(product_name=product_name,product_type=product_type,price=price,quantity=quantity)
     return Response({'message':'User Created Successfully'},status=status.HTTP_201_CREATED)

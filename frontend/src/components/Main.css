@@ -1,6 +1,7 @@
 html,
 body {
-  height: 100%;
+  background-color: rgb(43, 43, 43);
+  height: 1000px;
   margin: 0;
   padding: 0;
 }
@@ -8,7 +9,10 @@ body {
 .header1 {
   display: flex;
   flex-direction: row;
-  background-color: #cc85bc;
+  background: radial-gradient(circle at top left, #cc85bc, #ee9fdd);
+
+  justify-content: space-between;
+  align-items: center;
   height: 100px;
   width: 100%;
   position: fixed;
@@ -17,13 +21,31 @@ body {
   z-index: 1000;
 }
 
+.header2 {
+  display: flex;
+  flex-direction: row;
+  background: radial-gradient(circle at top right, #cc85bc, #ee9fdd);
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 1000;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.h2n {
+  color: white;
+}
 .search {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-right: 50px;
   padding-left: 50px;
-  margin-right: 600px;
 }
 .searchbar {
   padding-left: 10px;
@@ -51,13 +73,15 @@ body {
 }
 .icon:hover,
 .cart:hover,
-.info-p:hover {
+.info-p:hover,
+.h2n:hover {
   cursor: pointer;
   opacity: 0.8;
 }
 .icon:active,
 .cart:active,
-.info-p {
+.info-p:active,
+.h2n:active {
   cursor: pointer;
   opacity: 0.6;
 }
@@ -94,4 +118,59 @@ body {
 }
 .info {
   color: aliceblue;
+}
+.pcontainers {
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pcn1 {
+  width: 500px;
+  margin-left: 50px;
+  margin-right: 10px;
+  height: 550px;
+  background-color: rgb(48, 49, 49);
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 10px;
+}
+
+.pcn2 {
+  width: 900px;
+  margin-left: 10px;
+  margin-right: 50px;
+  height: 550px;
+  background-color: rgb(48, 49, 49);
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 10px;
+}
+
+.form {
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  flex-direction: column;
+  padding-left: 20px;
+}
+.box {
+  margin-bottom: 30px;
+  width: 700px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+}
+
+.vendor-container {
+  top: 0;
+  width: 1000px;
+  margin-left: 10px;
+  margin-right: 50px;
+  height: 200px;
+  background-color: rgb(48, 49, 49);
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 10px;
 }

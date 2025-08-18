@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,11 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=3600),  # change to 1 day
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # optional: change refresh token lifetime
+    'ROTATE_REFRESH_TOKENS': True,
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,15 +70,12 @@ CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-        # Or JWT (uncomment if you install simplejwt)
-        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",  # Ensure JWTAuthentication is used
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",  # tighten in prod
+        "rest_framework.permissions.IsAuthenticated",  # Require authentication for views
     ],
 }
-
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
