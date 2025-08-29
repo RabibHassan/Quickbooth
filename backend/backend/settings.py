@@ -54,7 +54,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '../frontend/dist'),  
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+WHITENOISE_USE_FINDERS = True
 WHITENOISE_INDEX_FILE = True
 WHITENOISE_ROOT = os.path.join(BASE_DIR, '../frontend/dist')
 

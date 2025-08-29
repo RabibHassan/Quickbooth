@@ -21,6 +21,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('api/', include('user.urls')),
-    path('', TemplateView.as_view(template_name='index.html')),  # Serve frontend at root
-    re_path(r'^(?!api/).*', TemplateView.as_view(template_name='index.html')),  # Handle other routes
+    re_path(r'^(?!api/).*', TemplateView.as_view(template_name='index.html')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
