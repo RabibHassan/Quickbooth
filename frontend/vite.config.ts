@@ -6,20 +6,6 @@ export default defineConfig({
   build: {
     outDir: "dist",
     assetsDir: "assets",
-    manifest: true,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:8000",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+  // Remove proxy since we're using the deployed URL directly
 });

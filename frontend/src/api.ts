@@ -1,7 +1,5 @@
 import axios from "axios";
-
-//set up base URL for django api
-const API_URL = "http://127.0.0.1:8000/api/auth";
+import API_URL from "./config/api";
 
 //Register user
 export const register = async (
