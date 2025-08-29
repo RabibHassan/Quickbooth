@@ -28,7 +28,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-su6em_0_sg@b8olg&-g-&+v2%y&zj0=9eq$goj%(rrnw#%g0&_')
 
 
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG =  True 
 
 #Mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -51,8 +51,10 @@ ALLOWED_HOSTS = ['quickbooth-2.onrender.com', '.onrender.com', 'localhost', '127
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../frontend/dist'),  
+    os.path.join(BASE_DIR, '../frontend/dist'),
 ]
+
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_INDEX_FILE = True
@@ -85,9 +87,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "https://quickbooth-2.onrender.com",
-    "https://quickbooth.onrender.com",
     "http://localhost:5173",
-    "http://127.0.0.1:5173",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

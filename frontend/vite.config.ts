@@ -7,5 +7,4 @@ export default defineConfig({
     outDir: "dist",
     assetsDir: "assets",
   },
-  // Remove proxy since we're using the deployed URL directly
 });

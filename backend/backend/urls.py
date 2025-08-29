@@ -20,6 +20,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('api/auth/', include('user.urls')),  # Changed this line
+    path('api/auth/', include('user.urls')),
     re_path(r'^(?!api/).*', TemplateView.as_view(template_name='index.html')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
