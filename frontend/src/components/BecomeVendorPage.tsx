@@ -1,242 +1,136 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout, getProfile, vendorForm, addProduct } from "../api";
+import { get_user_role, getProfile, vendorForm } from "../api";
+import Header from "./Header";
+import Footer from "./Footer";
 import "./Main.css";
 
 function BecomeVendorPage() {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
-    const [, setError] = useState<string>("");
-    const navigate = useNavigate();
-    const [profile, setProfile] = useState<{ id: string } | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [, setError] = useState<string>("");
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState<{ id: number } | null>(null);
+  const [store_name, setStore_name] = useState<string>("");
+  const [store_type, setStore_type] = useState<string>("");
+  const [vendor_name, setVendor_name] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
 
-    useEffect(() => {
-        //Check if access tokens exists in localStorage
-        if (!localStorage.getItem("access_token")) {
-            setIsAuthenticated(false);
-            navigate("/login");
-        }
-        else {
-            getProfile().then(res => { setProfile(res.data); })
-        }
-    }, [navigate]);
-
-    const [store_name, setStore_name] = useState<string>("");
-    const [stype, setStype] = useState<string>("");
-
-    const [product_name, setProduct_name] = useState<string>("");
-    const [product_type, setProduct_type] = useState<string>("");
-    const [price, setPrice] = useState<string>("");
-    const [quantity, setQuantity] = useState<string>("");
-
-
-
-    const handleLogout = () => {
-        logout();
-        navigate("/login");
-    };
-
-    const handleVendorform = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        try {
-            if (!profile) return;
-            const response = await vendorForm(store_name);
-            if (response) {
-                window.location.reload();
-            }
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (err: unknown) {
-            setError("Registration Failed. Please try again");
-        }
-    };
-
-    const handleaddProduct = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            if (!profile) return;
-            const response = await addProduct(product_name, product_type, price, quantity);
-            if (response) {
-                window.location.reload();
-            }
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (err: unknown) {
-            setError("Registration Failed. Please try again");
-        }
+  useEffect(() => {
+    // Check if access tokens exist in localStorage
+    if (!localStorage.getItem("access_token")) {
+      setIsAuthenticated(false);
+      navigate("/login");
+    } else {
+      getProfile().then((res) => {
+        setProfile(res.data);
+      });
+      fetchUserRole();
     }
+  }, [navigate]);
 
-    return (
-        <div>
-            <div className="header1">
-                <div className="name">
-                    <h2
-                        style={{
-                            color: "aliceblue",
-                            marginLeft: "20px",
-                            marginRight: "100px",
-                        }}
-                    >
-                        QuickBooth
-                    </h2>
-                </div>
-                <div className="search">
-                    <input
-                        className="searchbar"
-                        type="text"
-                        placeholder="Search for products"
-                    ></input>
-                </div>
-                <div className="icon">
-                    <img onClick={() => { navigate("/profile"); window.location.reload(); }} className="icon-img" src="/images/icon.png" />
-                </div>
-                <div className="cart">
-                    <img className="cart-img" src="/images/cart.png" />
-                </div>
-                <div className="details">
-                    <div style={{ paddingTop: "10px", paddingLeft: "5px" }}>
-                        <p className="info">Contact us now</p>
-                    </div>
-                    <div>
-                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                            <img style={{
-                                width: "30px",
-                                height: "30px"
-                            }} src="/images/call.png" />
-                            <div>
-                                <p className="info">+880-1739933678</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={{ paddingBottom: "10px", paddingRight: "25px" }}>
-                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                            <img style={{
-                                paddingRight: "5px",
-                                width: "15px",
-                                height: "15px"
-                            }} src="/images/link.png" />
-                            <p
-                                style={{ cursor: "pointer" }}
-                                className="info"
-                                onClick={() =>
-                                    window.open("https://github.com/RabibHassan", "_blank")
-                                }
-                            >
-                                github profile
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {isAuthenticated && (
-                    <div className="logout">
-                        <button className="logout-b" onClick={handleLogout}>
-                            Logout
-                        </button>
-                    </div>
-                )}
-            </div>
-            <div className="header2">
-                <div className="header2names">
-                    <p className="h2n" onClick={() => {
-                        navigate("/main");
-                        window.location.reload();
-                    }}>≡Home</p>
-                </div>
-                <div className="header2names">
-                    <p className="h2n">View shops</p>
-                </div>
-                <div className="header2names">
-                    <p onClick={() => navigate("/becomeVendor")} className="h2n">Become a vendor</p>
-                </div>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <h2 style={{ color: "white", paddingBottom: "20px" }}>Become a Vendor Now!</h2>
-            </div>
-            <div className="vendor-container">
-                <form onSubmit={handleVendorform}>
-                    <div>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                            <div>
-                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingLeft: "20px", paddingTop: "20px" }}>Enter Store Name: </p>
-                                <input style={{ marginLeft: "20px", paddingLeft: "10px", border: "none", marginRight: "20px", width: "470px" }}
-                                    type="text"
-                                    placeholder="Store Name"
-                                    value={store_name}
-                                    onChange={(e) => setStore_name(e.target.value)}
-                                    required
-                                    className="box" />
-                            </div>
-                            <div>
-                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingTop: "20px" }}>Enter Store Type: </p>
-                                <input style={{ marginRight: "20px", paddingLeft: "10px", border: "none", width: "470px" }}
-                                    type="text"
-                                    placeholder="Store Type"
-                                    value={stype}
-                                    onChange={(e) => setStype(e.target.value)}
-                                    required
-                                    className="box" />
-                            </div>
-                        </div>
-                        <button style={{ width: "60px", height: "40px", marginLeft: "470px" }} className="logout-b" type="submit">
-                            Submit
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div style={{ marginTop: "50px", height: "350px" }} className="vendor-container">
-                <form onSubmit={handleaddProduct}>
-                    <div>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                            <div>
-                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingLeft: "20px", paddingTop: "20px" }}>Enter Product Name: </p>
-                                <input style={{ marginLeft: "20px", paddingLeft: "10px", border: "none", marginRight: "20px", width: "470px" }}
-                                    type="text"
-                                    placeholder="Store Name"
-                                    value={product_name}
-                                    onChange={(e) => setProduct_name(e.target.value)}
-                                    required
-                                    className="box" />
-                            </div>
-                            <div>
-                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingTop: "20px" }}>Enter Product Type: </p>
-                                <input style={{ marginRight: "20px", paddingLeft: "10px", border: "none", width: "470px" }}
-                                    type="text"
-                                    placeholder="Store Type"
-                                    value={product_type}
-                                    onChange={(e) => setProduct_type(e.target.value)}
-                                    required
-                                    className="box" />
-                            </div>
-                        </div>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                            <div>
-                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingLeft: "20px", paddingTop: "20px" }}>Enter Price: </p>
-                                <input style={{ marginLeft: "20px", paddingLeft: "10px", border: "none", marginRight: "20px", width: "470px" }}
-                                    type="text"
-                                    placeholder="Store Name"
-                                    value={price}
-                                    onChange={(e) => setPrice(e.target.value)}
-                                    required
-                                    className="box" />
-                            </div>
-                            <div>
-                                <p style={{ fontWeight: "bold", color: "#cc85bc", paddingBottom: "10px", fontSize: "20px", paddingTop: "20px" }}>Enter Quantity: </p>
-                                <input style={{ marginRight: "20px", paddingLeft: "10px", border: "none", width: "470px" }}
-                                    type="text"
-                                    placeholder="Store Type"
-                                    value={quantity}
-                                    onChange={(e) => setQuantity(e.target.value)}
-                                    required
-                                    className="box" />
-                            </div>
-                        </div>
+  const fetchUserRole = () => {
+    get_user_role().then((res) => {
+      setUserRole(res.data.role);
+    });
+  };
 
-                        <button style={{ width: "60px", height: "40px", marginLeft: "470px" }} className="logout-b" type="submit">
-                            Submit
-                        </button>
-                    </div>
-                </form>
+  const handleVendorform = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (!profile) return;
+      const response = await vendorForm(profile.id, store_name, store_type);
+      if (response) {
+        window.location.reload();
+      }
+    } catch (err: unknown) {
+      setError("Registration Failed. Please try again");
+    }
+  };
+
+  return (
+    <div>
+      <Header isAuthenticated={isAuthenticated} userRole={userRole} />
+
+      <main className="main-content">
+        <div className="profile-page-container">
+          <div
+            style={{
+              width: "750px",
+              minHeight: "400px",
+              height: "auto",
+              maxWidth: "90%",
+            }}
+            className="profile-container"
+          >
+            <div className="profile-update">
+              <h1 className="form-title">Become a Vendor</h1>
+              <form onSubmit={handleVendorform} className="form">
+                <label className="form-label">Store Name:</label>
+                <input
+                  type="text"
+                  placeholder="Enter Store Name"
+                  value={store_name}
+                  onChange={(e) => setStore_name(e.target.value)}
+                  className="form-input"
+                  required
+                />
+
+                <label className="form-label">Store Type:</label>
+                <select
+                  value={store_type}
+                  onChange={(e) => setStore_type(e.target.value)}
+                  className="form-input"
+                  required
+                >
+                  <option value="">Select Store Type</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Footwear">Footwear</option>
+                </select>
+
+                <label className="form-label">Vendor Name:</label>
+                <input
+                  type="text"
+                  placeholder="Enter Vendor Name"
+                  value={vendor_name}
+                  onChange={(e) => setVendor_name(e.target.value)}
+                  className="form-input"
+                  required
+                />
+
+                <label className="form-label">Phone Number:</label>
+                <input
+                  type="text"
+                  placeholder="+880-"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="form-input"
+                  required
+                />
+
+                <label className="form-label">Store Address:</label>
+                <input
+                  type="text"
+                  placeholder="Enter Physical Store Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="form-input"
+                  required
+                />
+
+                <button type="submit" className="form-button">
+                  Submit
+                </button>
+              </form>
             </div>
+          </div>
         </div>
-    );
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
 export default BecomeVendorPage;

@@ -47,7 +47,7 @@ body {
 }
 
 .container button {
-  background: linear-gradient(to right, #ee9fdd, #cc85bc);
+  background: linear-gradient(to right, #c07cd4, #512c5c);
   color: #fff;
   font-size: 12px;
   padding: 10px 45px;
@@ -217,4 +217,44 @@ body {
 
 .container.active .toggle-right {
   transform: translateX(200%);
+}
+
+/* Add these styles to Login.css */
+.alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-family: "Questrial", sans-serif;
+  font-size: 14px;
+  z-index: 10000;
+  animation: slideDown 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-error {
+  background: rgba(211, 112, 122, 0.9);
+  color: white;
+  border: 1px solid rgba(211, 112, 122, 0.9);
+}
+
+.alert-warning {
+  background: rgba(243, 228, 183, 0.9);
+  color: #000;
+  border: 1px solid rgba(206, 186, 128, 0.9);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }

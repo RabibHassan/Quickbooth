@@ -1,0 +1,240 @@
+* {
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+.body {
+  padding: 20px;
+  margin: 0;
+  width: 100%;
+  min-height: 600px;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* ✅ Responsive */
+  gap: 20px;
+  justify-items: center;
+  font-family: "Lato", "Questrial";
+}
+
+.body:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Media query to ensure exactly 5 cards on larger screens */
+@media (min-width: 1800px) {
+  .body {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1799px) and (min-width: 1400px) {
+  .body {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 1000px) {
+  .body {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 999px) {
+  .body {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  width: 340px;
+  height: 450px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card .product-img {
+  width: 100%;
+  height: 260px;
+  position: relative;
+  background-color: rgb(238, 238, 238);
+  overflow: hidden; /* ← Add this to hide any overflow */
+}
+.card .product-img .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  top: 0;
+  left: 0;
+}
+
+.add-to-cart {
+  position: absolute;
+  width: 100%;
+  height: 260px;
+  background-color: rgba(81, 44, 92, 0.8);
+  left: 0;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-260px);
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover .add-to-cart {
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0px);
+  transition: all 0.3s ease-in-out;
+}
+
+.add-to-cart-btn {
+  padding: 10px 16px;
+  background-color: rgba(81, 44, 92, 0.8);
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: 400;
+  border: 4px solid aliceblue;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+.add-to-cart-select {
+  padding: 10px 16px;
+  background-color: transparent;
+  color: aliceblue;
+  font-size: 18px;
+  font-weight: 400;
+  border: 4px solid aliceblue;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  z-index: 1000;
+  position: relative;
+}
+
+.add-to-cart-btn:hover {
+  background-color: rgba(81, 44, 92, 0.6);
+  cursor: pointer;
+}
+.card:hover .add-to-cart-btn {
+  transform: scale(1.1);
+  transition-delay: 0.1s;
+  cursor: pointer;
+}
+.card:hover .add-to-cart-btn:hover {
+  transform: scale(1);
+  transition-delay: 0s;
+  cursor: pointer;
+}
+.card:hover .add-to-cart-btn:active {
+  transform: scale(1.1);
+  transition-delay: 0s;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.card-footer {
+  padding: 10px;
+  display: flex;
+  height: 210px;
+  width: 100%;
+  position: absolute;
+  bottom: -120px;
+  z-index: 9;
+  background-color: #e8d7f1;
+  flex-wrap: wrap;
+  transition: all 0.3s;
+}
+.card:hover .card-footer {
+  bottom: 0px;
+  transition: all 0.3s;
+}
+.title {
+  flex-basis: 80%;
+  text-align: start;
+  height: 60px;
+}
+.title h3 {
+  padding: 5px 0px;
+  margin: 0px;
+  color: rgb(128, 124, 124);
+}
+.title span {
+  color: rgb(51, 50, 50);
+  margin-bottom: 15px;
+}
+.price {
+  flex-basis: 20%;
+  text-align: end;
+  color: rgb(204, 18, 37);
+  font-weight: bold;
+  font-size: 20px;
+  height: 60px;
+}
+
+.card .price {
+  color: rgb(204, 18, 37) !important;
+}
+.h2deets {
+  display: flex;
+  flex-direction: row;
+}
+.product-options {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  align-self: baseline;
+  margin-top: 20px;
+}
+
+.colors {
+  display: flex;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+.colors strong {
+  width: 100%;
+  display: block;
+}
+.colors span {
+  width: 20px;
+  height: 20px;
+  display: block;
+  border-radius: 50%;
+  margin-right: 5px;
+  margin-top: 5px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+}
+.colors .black {
+  background-color: rgb(28, 32, 36);
+}
+.colors .pink {
+  background-color: rgb(226, 107, 173);
+}
+.colors .white {
+  background-color: #ffffff;
+}
+.colors span:hover {
+  transform: scale(0.8);
+}
