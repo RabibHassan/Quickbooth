@@ -51,10 +51,12 @@ ALLOWED_HOSTS = ['quickbooth-2.onrender.com', '.onrender.com', 'localhost', '127
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../frontend/dist/assets')  # Update to point to dist/assets
+    os.path.join(BASE_DIR, '../frontend/dist'),  
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+WHITENOISE_INDEX_FILE = True
+WHITENOISE_ROOT = os.path.join(BASE_DIR, '../frontend/dist')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
