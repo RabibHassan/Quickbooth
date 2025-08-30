@@ -94,7 +94,7 @@ export const updateProfile = async (
 //Get user role
 export const get_user_role = () => {
   const token = localStorage.getItem("access_token");
-  return axios.get(`${API_URL}/get_user_role`, {
+  return axios.get(`${API_URL}/get_user_role/`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

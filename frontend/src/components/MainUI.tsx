@@ -148,6 +148,12 @@ function MainPage() {
     }
   }, [items]);
 
+  useEffect(() => {
+    if (userRole === "vendor") {
+      navigate("/vendorDashboard");
+    }
+  }, [userRole, navigate]);
+
   const fetchUserRole = () => {
     get_user_role().then((res) => {
       console.log("Fetched user role: ", res.data);

@@ -11,19 +11,36 @@ import PaymentSuccess from "./components/PaymentSuccess";
 import PaymentFailed from "./components/PaymentFailed";
 import Payment from "./components/Payment";
 import SearchResults from "./components/SearchResults";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route
+          path="/becomeVendor"
+          element={
+            <ProtectedRoute>
+              <BecomeVendorPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendorDashboard"
+          element={
+            <ProtectedRoute>
+              <VendorDashboardPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/" element={<LoginRegPage />} />
         <Route path="/login" element={<LoginRegPage />} />
 
         <Route path="/main" element={<MainUI />} />
 
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/becomeVendor" element={<BecomeVendorPage />} />
-        <Route path="/vendorDashboard" element={<VendorDashboardPage />} />
+        {/* <Route path="/becomeVendor" element={<BecomeVendorPage />} />
+        <Route path="/vendorDashboard" element={<VendorDashboardPage />} /> */}
         <Route path="/seeProducts" element={<ProductsPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/cartDashboard" element={<CartPage />} />
