@@ -42,14 +42,13 @@ function BecomeVendorPage() {
       if (!profile) return;
       const response = await vendorForm(profile.id, store_name, store_type);
       if (response) {
-        await fetchUserRole(); // Fetch updated role
-        navigate("/vendorDashboard"); // Redirect to vendor dashboard
-        window.location.reload(); // Force reload to update header
+        window.location.reload();
       }
     } catch (err: unknown) {
       setError("Registration Failed. Please try again");
     }
   };
+
   return (
     <div>
       <Header isAuthenticated={isAuthenticated} userRole={userRole} />
