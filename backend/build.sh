@@ -15,6 +15,7 @@ mkdir -p static
 cd ../frontend
 npm install
 npm run build
+mkdir -p ../backend/static
 cp -r dist/* ../backend/static/
 
 # Back to backend directory
