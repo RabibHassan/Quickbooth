@@ -46,7 +46,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
 }
 
-ALLOWED_HOSTS = ['quickbooth-2.onrender.com', '.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['quickbooth-2-4lux.onrender.com', '.onrender.com', 'localhost', '127.0.0.1']
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -105,7 +105,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../frontend/dist')],
+        'DIRS': [os.path.join(BASE_DIR, 'staticfiles')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
