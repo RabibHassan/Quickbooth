@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='image',
-            field=models.CharField(blank=True, max_length=500, null=True),
+            field=models.CharField(blank=True, max_length=502, null=True),
         ),
     ]
