@@ -24,5 +24,6 @@ cd ../backend
 # Collect static files
 python manage.py collectstatic --no-input
 
-# Run migrations
+# Make and apply migrations
+python manage.py makemigrations user
 python manage.py migrate
