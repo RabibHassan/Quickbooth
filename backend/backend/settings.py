@@ -51,7 +51,7 @@ ALLOWED_HOSTS = ['quickbooth-2-4lux.onrender.com', '.onrender.com', 'localhost',
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../frontend/dist'),
+    os.path.join(BASE_DIR, 'static')
 ]
 
 
