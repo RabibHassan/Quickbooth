@@ -415,4 +415,5 @@ button.glider-next:hover {
   padding: 20px;
   min-height: calc(100vh - 300px);
   position: relative;
+  background-color: #2b2b2b; /* Add this */
 }
