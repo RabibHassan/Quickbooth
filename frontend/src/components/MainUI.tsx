@@ -193,7 +193,14 @@ function MainPage() {
       <img style={{ top: "120px", width: "1900px" }} src="images/banner.png" />
       <Header isAuthenticated={isAuthenticated} userRole={userRole} />
 
-      <main style={{ paddingTop: "60px" }} className="main-content">
+      <main
+        style={{
+          paddingTop: "60px",
+          color: "#2b2b2b",
+          backgroundColor: "#2b2b2b",
+        }}
+        className="main-content"
+      >
         <div className="vendor-dashboard-wrapper">
           {/* First Section - New Arrivals */}
           <div className="products-section">

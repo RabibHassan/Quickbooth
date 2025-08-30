@@ -113,6 +113,7 @@ body {
   flex: 1;
   padding-top: 120px;
   min-height: calc(100vh - 120px);
+  background-color: #2b2b2b;
 }
 
 /* Profile Page Layout */
