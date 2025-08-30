@@ -25,4 +25,5 @@ cd ../backend
 python manage.py collectstatic --no-input
 
 # Run migrations
+python manage.py makemigrations
 python manage.py migrate
