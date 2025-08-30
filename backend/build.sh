@@ -11,6 +11,15 @@ pip install -r requirements.txt
 # Create static directory if it doesn't exist
 mkdir -p static
 
+# Build frontend
+cd ../frontend
+npm install
+npm run build
+cp -r dist/* ../backend/static/
+
+# Back to backend directory
+cd ../backend
+
 # Collect static files
 python manage.py collectstatic --no-input
 
